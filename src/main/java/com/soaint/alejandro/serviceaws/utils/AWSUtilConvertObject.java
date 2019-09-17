@@ -24,19 +24,18 @@ public class AWSUtilConvertObject {
 	Emails emails = new Emails(crn.getAddress(), adtype);
 	Name name = new Name(crn.getFirst(),crn.getLast());
 	ContactRN contactrn = new ContactRN(emails,name);
+	public String param ="";
 	
 	//CONVERT TO OBJECT ENTRY JSON
   	public Contact convertcontact(String json) throws IOException {
     	mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         crn = mapper.readValue(json, Contact.class);
-        System.out.println(crn); 
         return crn;
     }
 	
 	 //CREATE CONTACT ELOQUA
     public String convertEloquaContact() throws IOException {
     	mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-    	String param ="";  
 		contactel = new ContactEL(crn.getAddress(),crn.getFirst(),crn.getLast());
 		param=mapper.writeValueAsString(contactel);	
 		return param;
@@ -45,7 +44,6 @@ public class AWSUtilConvertObject {
     //CREATE CONTACT SERVICE CLOUD
     public String convertServiceCloudContact() throws IOException {
     	mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-    	String param ="";  
     	contactsc = new ContactSC(crn.getFirst(),crn.getLast(),crn.getAddress());
     	param=mapper.writeValueAsString(contactsc);
     	return param;
@@ -54,7 +52,6 @@ public class AWSUtilConvertObject {
     //CREATE LEAD SERVICE CLOUD
     public String convertServiceCloudLead() throws IOException {
     	mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-    	String param ="";  
     	lead = new Lead(contactsc.getEmailAddress()+" Lead",aum.ID);
     	param=mapper.writeValueAsString(lead);
     	return param;
@@ -63,7 +60,6 @@ public class AWSUtilConvertObject {
     //CREATE CONTACT RIGHT NOW
     public String convertRightNowContact() throws IOException {
     	mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-    	String param ="";  
 		adtype = new AddressType(0);
 		emails = new Emails(crn.getAddress(), adtype);
 		name = new Name(crn.getFirst(),crn.getLast());

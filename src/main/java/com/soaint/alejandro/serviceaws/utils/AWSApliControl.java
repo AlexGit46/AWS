@@ -3,7 +3,7 @@ package com.soaint.alejandro.serviceaws.utils;
 import java.util.ResourceBundle;
 
 public class AWSApliControl {
-    private static final ResourceBundle PROPERTIES = ResourceBundle.getBundle("properties");
+    private static final ResourceBundle PROPERTIES = ResourceBundle.getBundle("application");
         public String getURLRN(){
                 return PROPERTIES.getString("URLRN");
             }

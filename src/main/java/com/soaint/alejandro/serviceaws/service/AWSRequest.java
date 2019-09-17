@@ -13,7 +13,7 @@ public class AWSRequest {
 	private static AWSUtilGetURL aug = new AWSUtilGetURL();
 
     public static boolean EXIST;
-	public String API;
+	public static String API;
 
 	private String param="";
 	private String url="";
@@ -21,6 +21,7 @@ public class AWSRequest {
   //----------------------ADD---------------------------------------------------------------------------
   	public String setEloqua(Contact con) throws IOException {
         API="ELOQUA";
+        System.out.println(API);
 	    param = auc.convertEloquaContact();
 	    url = aug.getURLEloquaContactMail()+ "'" + con.getAddress() + "'";
 	    crud.GET(url);

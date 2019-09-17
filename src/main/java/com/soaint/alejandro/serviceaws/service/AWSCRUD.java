@@ -19,7 +19,7 @@ public class AWSCRUD {
     private static AWSUtilCovertJson aucj = new AWSUtilCovertJson();
     private static AWSUtilMapObject aum = new AWSUtilMapObject();
 
-    private String userCredentials;
+    public String userCredentials;
     int responseCode=0;
 
     //----------------------GET---------------------------------------------------------------------------	
@@ -30,6 +30,7 @@ public class AWSCRUD {
         URL obj = new URL(url);
         HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
         conn.setRequestMethod(apc.getGET());
+        System.out.println("hola"+req.API);
         switch(req.API) {case "ELOQUA":userCredentials = aua.getAuthEloqua();break;
         				 case "SERVICE_CLOUD":userCredentials = aua.getAuthServiceCloud();break;
         				 case "RIGHT_NOW":userCredentials = aua.getAuthRightNow();break;     	

@@ -1,6 +1,5 @@
 package com.soaint.alejandro.serviceaws.utils;
 
-import java.io.IOException;
 import java.util.Base64;
 
 public class AWSUtilAuthorization {
