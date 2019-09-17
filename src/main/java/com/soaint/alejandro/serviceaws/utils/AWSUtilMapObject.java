@@ -16,7 +16,6 @@ import com.soaint.alejandro.serviceaws.service.AWSRequest;
 
 public class AWSUtilMapObject {
 	private static AWSRequest req = new AWSRequest();
-
     private ContactEL contactel = new ContactEL();
     private ContactSC contactsc = new ContactSC();
     private Lead lead = new Lead();
