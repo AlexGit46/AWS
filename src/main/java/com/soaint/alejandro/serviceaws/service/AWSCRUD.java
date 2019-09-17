@@ -11,7 +11,6 @@ import java.util.Properties;
 import com.soaint.alejandro.serviceaws.utils.*;
 
 public class AWSCRUD {
-    private static Properties p = new Properties(System.getProperties());
     private static AWSApliControl apc = new AWSApliControl();
     private static AWSRequest req = new AWSRequest();
     private static AWSUtilAuthorization aua = new AWSUtilAuthorization();
@@ -19,15 +18,14 @@ public class AWSCRUD {
     private static AWSUtilCovertJson aucj = new AWSUtilCovertJson();
     private static AWSUtilMapObject aum = new AWSUtilMapObject();
 
-    public String userCredentials;
-    int responseCode=0;
+    private URL obj;
+    private String userCredentials;
+    private int responseCode=0;
 
     //----------------------GET---------------------------------------------------------------------------	
     public String GET(String url) throws IOException {
-  		InputStream is = new FileInputStream("application.properties");
-  		p.load(is); 
   		String ret="";
-        URL obj = new URL(url);
+        obj = new URL(url);
         HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
         conn.setRequestMethod(apc.getGET());
         switch(req.API) {case "ELOQUA":userCredentials = aua.getAuthEloqua();break;
@@ -49,9 +47,7 @@ public class AWSCRUD {
 
 	//----------------------POST---------------------------------------------------------------------------	
     public void POST(String url, String param) throws IOException {
-		InputStream is = new FileInputStream("application.properties");
-		p.load(is);
-        URL obj = new URL(url);
+        obj = new URL(url);
         HttpURLConnection postConnection = (HttpURLConnection) obj.openConnection();
         postConnection.setRequestMethod(apc.getPOST());
         postConnection.setRequestProperty(apc.getPROPERTY_1(), apc.getPROPERTY_2());
@@ -71,15 +67,13 @@ public class AWSCRUD {
     
     //----------------------DELETE---------------------------------------------------------------------------   
     public void DELETE(String url) throws IOException {
-		InputStream is = new FileInputStream("application.properties");
-		p.load(is);
-        URL obj = new URL(url);
+        obj = new URL(url);
         HttpURLConnection postConnection = (HttpURLConnection) obj.openConnection();
         postConnection.setRequestMethod("DELETE");
         postConnection.setRequestProperty(apc.getPROPERTY_1(), apc.getPROPERTY_2());
         switch(req.API) {case "ELOQUA":userCredentials = aua.getAuthEloqua();break;
         				 case "SERVICE_CLOUD":userCredentials = aua.getAuthServiceCloud();break;
-        				 case "RIGHT_NOW":userCredentials = aua.getAuthRightNow();        	break;     	
+        				 case "RIGHT_NOW":userCredentials = aua.getAuthRightNow();break;
         				}
         postConnection.setRequestProperty ("Authorization", userCredentials);
         postConnection.setDoOutput(true);

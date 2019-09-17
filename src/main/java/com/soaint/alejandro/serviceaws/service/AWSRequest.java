@@ -19,7 +19,7 @@ public class AWSRequest {
 	private String url="";
 
   //----------------------ADD---------------------------------------------------------------------------
-  	public String setEloqua(Contact con) throws IOException {
+  	public void setEloqua(Contact con) throws IOException {
         API="ELOQUA";
         System.out.println(API);
 	    param = auc.convertEloquaContact();
@@ -28,11 +28,10 @@ public class AWSRequest {
 	    url = aug.getURLEloquaContact();
 	    if(!EXIST) {
 	    	crud.POST(url,param);
-	    }	    
-	    return "Contacto Eloqua creado";        
+	    }
     }
 
-	public String setServiceCloud(Contact con) throws IOException {
+	public void setServiceCloud(Contact con) throws IOException {
         API="SERVICE_CLOUD";
     	param = auc.convertServiceCloudContact();
     	url = aug.getURLServiceCloudContactMail()+ "'" + con.getAddress() + "'";
@@ -47,10 +46,9 @@ public class AWSRequest {
     			url = aug.getURLServiceCloudLead();
     			crud.POST(url,param);
     	}
-	    return "Contacto ServiceCloud creado con creación de Lead";        
     }
 
-	public String setRightNow(Contact con) throws IOException {
+	public void setRightNow(Contact con) throws IOException {
         API="RIGHT_NOW";
     	param = auc.convertRightNowContact();
     	url = aug.getURLRightNowContactMail()+ "'" + con.getAddress() + "'";
@@ -58,22 +56,20 @@ public class AWSRequest {
     	url = aug.getURLRightNowContact();
     	if(!EXIST) {
     		crud.POST(url,param);
-    	}   
-	    return "Contacto RightNow creado";        
+    	}
     } 
       
 	//----------------------DELETE---------------------------------------------------------------------------		
-	public String deleteContactEloqua(String email) throws IOException{
+	public void deleteContactEloqua(String email) throws IOException{
         String id;
 	    API = "ELOQUA";
         url = aug.getURLEloquaContactMail() + "'" + email + "'";
 		id = crud.GET(url);
 		url = aug.getURLEloquaContact() + "/" + id;
-		crud.DELETE(url);				
-        return "Eliminado con éxito";
+		crud.DELETE(url);
 	}
 
-	public String deleteContactLeadServiceCloud(String email) throws IOException{
+	public void deleteContactLeadServiceCloud(String email) throws IOException{
         String id;
 	    API = "SERVICE_CLOUD";
         url = aug.getURLServiceCloudContactMail() + "'" + email + "'";
@@ -85,17 +81,15 @@ public class AWSRequest {
 			id = crud.GET(url);
 			url = aug.getURLServiceCloudLead() + "/" + id;
 			crud.DELETE(url);
-		return "Eliminado con éxito";
 	}
 
-	public String deleteContactRightNow(String email) throws IOException{
+	public void deleteContactRightNow(String email) throws IOException{
         String id;
 	    API = "RIGHT_NOW";
         url = aug.getURLRightNowContactMail() + "'" + email + "'";
 		id = crud.GET(url);
 		url = aug.getURLRightNowContact() + "/" + id;
-		crud.DELETE(url);				
-        return "Eliminado con éxito";
+		crud.DELETE(url);
 	}
 }
 
