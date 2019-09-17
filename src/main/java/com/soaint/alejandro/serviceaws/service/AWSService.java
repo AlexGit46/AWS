@@ -1,7 +1,6 @@
 package com.soaint.alejandro.serviceaws.service;
 
 import java.io.IOException;
-import java.util.Properties;
 
 import org.springframework.stereotype.Service;
 
@@ -10,9 +9,9 @@ import com.soaint.alejandro.serviceaws.utils.AWSUtilConvertObject;
 
 @Service
 public class AWSService { 
-    public static AWSRequest req = new AWSRequest();
-    public static AWSUtilConvertObject auc = new AWSUtilConvertObject();
-    public static Contact con = new Contact(); 
+    private static AWSRequest req = new AWSRequest();
+	private static AWSUtilConvertObject auc = new AWSUtilConvertObject();
+	private static Contact con = new Contact();
     
     //----------------------ADD---------------------------------------------------------------------------   
 	public String addContact(String json) throws IOException{		

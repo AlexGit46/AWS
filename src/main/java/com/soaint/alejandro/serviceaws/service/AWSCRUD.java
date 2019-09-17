@@ -8,22 +8,22 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Properties;
 
-import com.soaint.alejandro.serviceaws.controller.AWSController;
 import com.soaint.alejandro.serviceaws.utils.*;
 
-public class AWSCRUD {	
-    public static Properties p = new Properties(System.getProperties());   
-    public static AWSController aws = new AWSController();
-    public static AWSApliControl apc = new AWSApliControl();
-    public static AWSRequest req = new AWSRequest();    
-    public static AWSUtilAuthorization aua = new AWSUtilAuthorization();
-    public static AWSUtilStringBuilder aus = new AWSUtilStringBuilder();
-    public static AWSUtilCovertJson aucj = new AWSUtilCovertJson();
-    public static AWSUtilMapObject aum = new AWSUtilMapObject();
-	public String userCredentials;
+public class AWSCRUD {
+    private static Properties p = new Properties(System.getProperties());
+    private static AWSApliControl apc = new AWSApliControl();
+    private static AWSRequest req = new AWSRequest();
+    private static AWSUtilAuthorization aua = new AWSUtilAuthorization();
+    private static AWSUtilStringBuilder aus = new AWSUtilStringBuilder();
+    private static AWSUtilCovertJson aucj = new AWSUtilCovertJson();
+    private static AWSUtilMapObject aum = new AWSUtilMapObject();
+
+    private String userCredentials;
+    int responseCode=0;
 
     //----------------------GET---------------------------------------------------------------------------	
-  	public String GET(String url) throws IOException {		
+    public String GET(String url) throws IOException {
   		InputStream is = new FileInputStream("application.properties");
   		p.load(is); 
   		String ret="";
@@ -50,8 +50,7 @@ public class AWSCRUD {
 	//----------------------POST---------------------------------------------------------------------------	
     public void POST(String url, String param) throws IOException {
 		InputStream is = new FileInputStream("application.properties");
-		p.load(is); 
-		int responseCode=0;
+		p.load(is);
         URL obj = new URL(url);
         HttpURLConnection postConnection = (HttpURLConnection) obj.openConnection();
         postConnection.setRequestMethod(apc.getPOST());
@@ -73,8 +72,7 @@ public class AWSCRUD {
     //----------------------DELETE---------------------------------------------------------------------------   
     public void DELETE(String url) throws IOException {
 		InputStream is = new FileInputStream("application.properties");
-		p.load(is); 
-		int responseCode=0;
+		p.load(is);
         URL obj = new URL(url);
         HttpURLConnection postConnection = (HttpURLConnection) obj.openConnection();
         postConnection.setRequestMethod("DELETE");

@@ -4,31 +4,31 @@ import java.io.IOException;
 import java.util.Base64;
 
 public class AWSUtilAuthorization {
-	public static AWSApliControl apc = new AWSApliControl();
+	private static AWSApliControl apc = new AWSApliControl();
+
+	public String basicAuth;
+	public String auth;
 	
 	//CONVERT TO 64
-  	public String convert64(String userCredentials){
-  		String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userCredentials.getBytes())); 		
+  	private String convert64(String userCredentials){
+  		basicAuth = "Basic " + new String(Base64.getEncoder().encode(userCredentials.getBytes()));
   		return basicAuth;
     }
 	
   	//GET AUTHORIZATION ELOQUA
-  	public String getAuthEloqua() throws IOException {
-  		String auth="";
+  	public String getAuthEloqua() {
   		auth = apc.getCREDELO();
   		return convert64(auth);		
     }
   	
     //GET AUTHORIZATION ELOQUA
-  	public String getAuthServiceCloud() throws IOException {
-  		String auth="";
+  	public String getAuthServiceCloud() {
   		auth = apc.getCREDOSC();
   		return convert64(auth);
     }
   	
     //GET AUTHORIZATION ELOQUA
-  	public String getAuthRightNow() throws IOException {
-  		String auth="";
+  	public String getAuthRightNow(){
   		auth = apc.getCRED();
   		return convert64(auth);
     }

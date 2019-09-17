@@ -1,57 +1,43 @@
 package com.soaint.alejandro.serviceaws.service;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
-import org.codehaus.jackson.map.ObjectMapper;
-
-import com.soaint.alejandro.serviceaws.controller.AWSController;
 import com.soaint.alejandro.serviceaws.model.Contact;
-import com.soaint.alejandro.serviceaws.utils.AWSUtilAuthorization;
 import com.soaint.alejandro.serviceaws.utils.AWSUtilConvertObject;
 import com.soaint.alejandro.serviceaws.utils.AWSUtilGetURL;
-import com.soaint.alejandro.serviceaws.utils.AWSUtilMapObject;
-import com.soaint.alejandro.serviceaws.utils.AWSUtilStringBuilder;
 
 public class AWSRequest {
 
-    public static AWSController aws = new AWSController();     
-    public static AWSCRUD crud = new AWSCRUD(); 
-    public static AWSUtilAuthorization aua = new AWSUtilAuthorization();
-    public static AWSUtilConvertObject auc = new AWSUtilConvertObject();
-    public static AWSUtilGetURL aug = new AWSUtilGetURL();
-    public static AWSUtilMapObject aum = new AWSUtilMapObject();
-    public static AWSUtilStringBuilder aus = new AWSUtilStringBuilder();
+	private static AWSCRUD crud = new AWSCRUD();
+	private static AWSUtilConvertObject auc = new AWSUtilConvertObject();
+	private static AWSUtilGetURL aug = new AWSUtilGetURL();
 
     public static boolean EXIST;
-    public static String API;
-    
-    public String param="";
-    public String url="";
-   
-    
+	public String API;
+
+	private String param="";
+	private String url="";
+
   //----------------------ADD---------------------------------------------------------------------------
-    public String setEloqua(Contact con) throws IOException {
+  	public String setEloqua(Contact con) throws IOException {
         API="ELOQUA";
 	    param = auc.convertEloquaContact();
 	    url = aug.getURLEloquaContactMail()+ "'" + con.getAddress() + "'";
 	    crud.GET(url);
 	    url = aug.getURLEloquaContact();
-	    if(EXIST==false) {
+	    if(!EXIST) {
 	    	crud.POST(url,param);
 	    }	    
 	    return "Contacto Eloqua creado";        
-    } 
-    
-    public String setServiceCloud(Contact con) throws IOException {
+    }
+
+	public String setServiceCloud(Contact con) throws IOException {
         API="SERVICE_CLOUD";
     	param = auc.convertServiceCloudContact();
     	url = aug.getURLServiceCloudContactMail()+ "'" + con.getAddress() + "'";
     	crud.GET(url);
     	url = aug.getURLServiceCloudContact();
-    	if(EXIST==false) {
+    	if(!EXIST) {
     		crud.POST(url,param);
     		url = aug.getURLServiceCloudContactMail()+ "'" + con.getAddress() + "'";
     		crud.GET(url);
@@ -62,14 +48,14 @@ public class AWSRequest {
     	}
 	    return "Contacto ServiceCloud creado con creación de Lead";        
     }
-    
-    public String setRightNow(Contact con) throws IOException {
+
+	public String setRightNow(Contact con) throws IOException {
         API="RIGHT_NOW";
     	param = auc.convertRightNowContact();
     	url = aug.getURLRightNowContactMail()+ "'" + con.getAddress() + "'";
     	crud.GET(url);
     	url = aug.getURLRightNowContact();
-    	if(EXIST==false) {
+    	if(!EXIST) {
     		crud.POST(url,param);
     	}   
 	    return "Contacto RightNow creado";        
@@ -85,7 +71,7 @@ public class AWSRequest {
 		crud.DELETE(url);				
         return "Eliminado con éxito";
 	}
-	
+
 	public String deleteContactLeadServiceCloud(String email) throws IOException{
         String id;
 	    API = "SERVICE_CLOUD";
@@ -100,7 +86,7 @@ public class AWSRequest {
 			crud.DELETE(url);
 		return "Eliminado con éxito";
 	}
-	
+
 	public String deleteContactRightNow(String email) throws IOException{
         String id;
 	    API = "RIGHT_NOW";

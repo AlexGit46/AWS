@@ -15,20 +15,21 @@ import com.soaint.alejandro.serviceaws.model.servicecloud.Lead;
 import com.soaint.alejandro.serviceaws.service.AWSRequest;
 
 public class AWSUtilMapObject {
-	public static AWSRequest req = new AWSRequest();
-	
-    public ContactEL contactel = new ContactEL();
-    public ContactSC contactsc = new ContactSC();
-    public Lead lead = new Lead();
-	
+	private static AWSRequest req = new AWSRequest();
+
+    private ContactEL contactel = new ContactEL();
+    private ContactSC contactsc = new ContactSC();
+    private Lead lead = new Lead();
     public static String ID;
+    JSONArray items;
+
 	//MAPEO OBJETO CONTACTO ELOQUA
-    public String mapEloquaContact(StringBuilder response) throws IOException {
+    public String mapEloquaContact(StringBuilder response){
 		long id=0;
         try {
             JSONObject object = new JSONObject(response.toString());           
             if(object.has("elements")) {
-        	   JSONArray items = new JSONArray();
+        	   items = new JSONArray();
                items = object.getJSONArray("elements");    
                if (items.length() > 0) {
             	   req.EXIST=true;           	
@@ -46,12 +47,12 @@ public class AWSUtilMapObject {
     }
     
     //MAPEO OBJETO CONTACTO SERVICE CLOUD
-    public String mapServiceCloudContact(StringBuilder response) throws IOException {
+    public String mapServiceCloudContact(StringBuilder response){
 		long id=0;
         try {
             JSONObject object = new JSONObject(response.toString());
             if(object.has("items")) {
-            	JSONArray items = new JSONArray();
+            	items = new JSONArray();
             	items = object.getJSONArray("items");      
                 if (items.length() > 0) {
                 	req.EXIST=true;          	
@@ -62,8 +63,7 @@ public class AWSUtilMapObject {
                 }
             }else {
          	   System.out.println("Item not found");
-            }  
-            
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -71,12 +71,12 @@ public class AWSUtilMapObject {
     }
     
     //MAPEO OBJETO LEAD SERVICE CLOUD
-    public String mapServiceCloudLead(StringBuilder response) throws IOException {
+    public String mapServiceCloudLead(StringBuilder response){
 		long id=0;
         try {
             JSONObject object = new JSONObject(response.toString());
             if(object.has("items")) {
-	            JSONArray items = new JSONArray();
+	            items = new JSONArray();
 	            items = object.getJSONArray("items");     
 	            if (items.length() > 0) {
 	            	req.EXIST=true;          	
@@ -94,12 +94,12 @@ public class AWSUtilMapObject {
     }
     
     //MAPEO OBJETO CONTACTO RIGHT NOW
-    public String mapRightNowContact(StringBuilder response) throws IOException {
+    public String mapRightNowContact(StringBuilder response){
 		long id=0;
         try {
             JSONObject object = new JSONObject(response.toString());
             if(object.has("items")) {
-	            JSONArray items = new JSONArray();
+	            items = new JSONArray();
 	            items = object.getJSONArray("items");       
 	            if (items.length() > 0) {
 	            	req.EXIST=true;          	
