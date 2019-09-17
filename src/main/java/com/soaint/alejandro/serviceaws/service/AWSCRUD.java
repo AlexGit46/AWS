@@ -30,7 +30,6 @@ public class AWSCRUD {
         URL obj = new URL(url);
         HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
         conn.setRequestMethod(apc.getGET());
-        System.out.println("hola"+req.API);
         switch(req.API) {case "ELOQUA":userCredentials = aua.getAuthEloqua();break;
         				 case "SERVICE_CLOUD":userCredentials = aua.getAuthServiceCloud();break;
         				 case "RIGHT_NOW":userCredentials = aua.getAuthRightNow();break;     	
