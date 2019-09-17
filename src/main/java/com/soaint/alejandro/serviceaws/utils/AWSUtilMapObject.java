@@ -1,10 +1,5 @@
 package com.soaint.alejandro.serviceaws.utils;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
